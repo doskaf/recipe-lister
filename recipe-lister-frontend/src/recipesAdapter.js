@@ -7,8 +7,8 @@ class RecipesAdapter{
       fetch(this.baseURL)
         .then(res => res.json())
         .then(resObj => {
-          resObj.data.forEach(obj => {
-            let sanitized = {id: obj.id, ...obj.attributes}
+          resObj.forEach(obj => {
+            let sanitized = {id: obj.id, name: obj.name, ...obj.attributes}
             new Recipe(sanitized.id, sanitized.name)
           })
         })

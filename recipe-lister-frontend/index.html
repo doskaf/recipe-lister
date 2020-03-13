@@ -6,6 +6,40 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <div class="container">
+        <form class="add-recipe-form">
+          <h3>Post a new recipe!</h3>
+  
+          <input
+            type="text"
+            name="name"
+            value=""
+            placeholder="Enter recipe name..."
+            class="input-text"
+          />
+          <br />
+          <div id="ingredients-input">
+            <input
+              type="text"
+              name="ingredient"
+              value=""
+              placeholder="Add an ingredient"
+              class="input-text"
+            />
+          </div>
+          <button id="add-another-ingredient">
+            Add Another Ingredient
+          </button>
+          <br />
+          <input
+            type="submit"
+            name="submit"
+            value="Post a New Recipe"
+            class="submit"
+          />
+        </form>
+      </div>
+
     <h1>All Recipes</h1>
     
     <div id="header-buttons">
