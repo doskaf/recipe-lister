@@ -9,7 +9,7 @@ class IngredientsAdapter {
         .then(resObj => {
           resObj.data.forEach(ingredientObj => {
             let sanitized = {...ingredientObj.attributes, id: ingredientObj.id, recipeId: ingredientObj.relationships.recipe.data.id}
-            new Ingredient(sanitized)
+            new Ingredient(sanitized.id, sanitized.name, sanitized.amount, sanitized.recipeId)
           })
         })
         .then(() => console.log(Ingredient.all))

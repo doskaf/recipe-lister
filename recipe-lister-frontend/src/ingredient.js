@@ -6,7 +6,7 @@ class Ingredient {
         this.id = id;
         this.name = name;
         this.amount = amount;
-        this.recipeId = recipe.id;
+        this.recipeId = recipeId;
 
         Ingredient.all.push(this);
     }
