@@ -5,4 +5,13 @@ class IngredientsController < ApplicationController
         render json: ingredients
     end
 
+    def create
+        ingredient = Ingredient.new(name: params[name], amount: params[amount], recipeId: params[recipeId])
+        if ingredient.save
+            render json: ingredient
+        else
+            render json: { errors: ingredient.errors.full_messages }
+        end
+    end
+
 end
