@@ -28,14 +28,24 @@ function formListener() {
         let ingredientInput = document.querySelector("#ingredients-input");
         let div = document.createElement('div');
         div.id = "ingredient-input-" + `${++counter}`
-        let input = document.createElement("INPUT");
-        input.setAttribute("type", "text");
-        input.setAttribute("name", "ingredient");
-        input.setAttribute("value", "");
-        input.setAttribute("placeholder", "Add an ingredient");
-        input.setAttribute("class", "input-text");
+
+        let nameInput = document.createElement("INPUT");
+        nameInput.setAttribute("type", "text");
+        nameInput.setAttribute("name", "name");
+        nameInput.setAttribute("value", "");
+        nameInput.setAttribute("placeholder", "Ingredient Name...");
+        nameInput.setAttribute("class", "input-text");
+
+        let amountInput = document.createElement("INPUT");
+        amountInput.setAttribute("type", "text");
+        amountInput.setAttribute("name", "amount");
+        amountInput.setAttribute("value", "");
+        amountInput.setAttribute("placeholder", "Amount...");
+        amountInput.setAttribute("class", "input-text");
+
         let br = document.createElement('BR');
-        div.appendChild(input);
+        div.appendChild(nameInput);
+        div.appendChild(amountInput);
         div.appendChild(br);
         ingredientInput.appendChild(div);
     })
