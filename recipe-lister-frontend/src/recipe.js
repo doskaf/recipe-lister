@@ -6,15 +6,15 @@ class Recipe {
         this.id = id;
         this.name = name;
 
-        this.element = document.createElement('div');
-        this.element.className = "recipe";
-        this.element.id = `recipe-${this.id}`;
+        this.div = document.createElement('div');
+        this.div.className = "recipe";
+        this.div.id = `recipe-${this.id}`;
 
         Recipe.all.push(this);
     }
 
     fullRender() {
-        this.element.innerHTML = `
+        this.div.innerHTML = `
         <h3>${this.name}</h3>
         <button class="add-to-list-button">Add to Shopping List</button><br />
         <ul></ul><br />

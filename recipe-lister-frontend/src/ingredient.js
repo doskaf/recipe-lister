@@ -10,4 +10,15 @@ class Ingredient {
 
         Ingredient.all.push(this);
     }
+
+    recipe() {
+        Recipe.all.find(e => e.id === this.recipeId)
+    }
+
+    fullRender() {
+        let li = document.createElement('LI');
+        let ul = this.recipe.div.children[2];
+        li.innerText = `${this.name} | ${this.amount}`;
+        ul.appendChild(li);
+    }
 }
