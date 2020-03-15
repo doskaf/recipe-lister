@@ -29,24 +29,24 @@ function formListener() {
         let div = document.createElement('div');
         div.id = `ingredient-input-${++counter}`
 
-        let nameInput = document.createElement("INPUT");
-        nameInput.setAttribute("type", "text");
-        nameInput.setAttribute("name", "name");
-        nameInput.setAttribute("value", "");
-        nameInput.setAttribute("placeholder", "Ingredient Name...");
-        nameInput.setAttribute("class", "input-text");
-
-        let amountInput = document.createElement("INPUT");
-        amountInput.setAttribute("type", "text");
-        amountInput.setAttribute("name", "amount");
-        amountInput.setAttribute("value", "");
-        amountInput.setAttribute("placeholder", "Amount...");
-        amountInput.setAttribute("class", "input-text");
-
-        let br = document.createElement('BR');
-        div.appendChild(nameInput);
-        div.appendChild(amountInput);
-        div.appendChild(br);
+        div.innerHTML = "
+        <input
+            type="text"
+            name="name"
+            value=""
+            placeholder="Ingredient Name..."
+            class="input-text"
+        />
+        <input
+            type="text"
+            name="amount"
+            value=""
+            placeholder="Amount"
+            class="input-text"
+        />
+        <br />
+        "
+        
         ingredientInput.appendChild(div);
     })
 }
