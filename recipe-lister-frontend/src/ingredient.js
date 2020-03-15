@@ -12,12 +12,12 @@ class Ingredient {
     }
 
     recipe() {
-        Recipe.all.find(e => e.id === this.recipeId)
+        return Recipe.all.find(e => e.id === this.recipeId)
     }
 
     fullRender() {
+        let ul = document.querySelector(`#recipe-${this.recipeId}`).children[3]
         let li = document.createElement('LI');
-        let ul = this.recipe.div.children[2];
         li.innerText = `${this.name} | ${this.amount}`;
         ul.appendChild(li);
     }

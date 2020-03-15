@@ -13,13 +13,25 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 })
 
-let ingredientAdapter = new IngredientsAdapter("http://localhost:3000/ingredients");
-ingredientAdapter.fetchIngredients();
-
 let recipeAdapter = new RecipesAdapter("http://localhost:3000/recipes");
 recipeAdapter.fetchRecipes();
 
-const main = document.getElementById('main')
+let ingredientAdapter = new IngredientsAdapter("http://localhost:3000/ingredients");
+ingredientAdapter.fetchIngredients();
+
+// function renderAllRecipes(){
+//     Recipe.all.forEach(recipe => {
+//         let h = document.createElement('H1');
+//         h.innerText = `${recipe.name}`
+//         document.getElementById('main').appendChild(h);
+//     })
+// }
+
+function renderAllIngredients(){
+    Ingredient.all.forEach(ingredient => {
+      ingredient.fullRender();
+    })
+}
 
 function formListener() {
     let counter = 0;
@@ -29,7 +41,7 @@ function formListener() {
         let div = document.createElement('div');
         div.id = `ingredient-input-${++counter}`
 
-        div.innerHTML = "
+        div.innerHTML = `
         <input
             type="text"
             name="name"
@@ -45,7 +57,7 @@ function formListener() {
             class="input-text"
         />
         <br />
-        "
+        `
         
         ingredientInput.appendChild(div);
     })

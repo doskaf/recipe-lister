@@ -14,6 +14,7 @@ class Recipe {
     }
 
     fullRender() {
+        let main = document.querySelector("#main");
         this.div.innerHTML = `
         <h3>${this.name}</h3>
         <button class="add-to-list-button">Add to Shopping List</button><br />
@@ -21,5 +22,6 @@ class Recipe {
         <button class="edit-recipe-button">Edit</button><br />
         <button class="delete-recipe-button">Delete Recipe</button>
         `
+        main.appendChild(this.div);
     }
 }

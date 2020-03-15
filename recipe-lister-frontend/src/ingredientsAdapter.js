@@ -12,6 +12,9 @@ class IngredientsAdapter {
             new Ingredient(sanitized.id, sanitized.name, sanitized.amount, sanitized.recipeId)
           })
         })
-        .then(() => console.log(Ingredient.all))
+        .then(() => {
+          console.log(Ingredient.all)
+          Ingredient.all.forEach(ingredient => ingredient.fullRender())
+        })
     }
 }

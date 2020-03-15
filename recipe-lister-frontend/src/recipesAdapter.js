@@ -12,6 +12,9 @@ class RecipesAdapter{
             new Recipe(sanitized.id, sanitized.name)
           })
         })
-        .then(() => console.log(Recipe.all))
+        .then(() => {
+          console.log(Recipe.all)
+          Recipe.all.forEach(recipe => recipe.fullRender())
+        })
     }
   }
