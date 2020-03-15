@@ -27,7 +27,7 @@ function formListener() {
         event.preventDefault();
         let ingredientInput = document.querySelector("#ingredients-input");
         let div = document.createElement('div');
-        div.id = "ingredient-input-" + `${++counter}`
+        div.id = `ingredient-input-${++counter}`
 
         let nameInput = document.createElement("INPUT");
         nameInput.setAttribute("type", "text");
