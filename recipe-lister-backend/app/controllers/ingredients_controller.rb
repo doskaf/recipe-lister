@@ -6,7 +6,7 @@ class IngredientsController < ApplicationController
     end
 
     def create
-        ingredient = Ingredient.new(name: params[name], amount: params[amount], recipeId: params[recipeId])
+        ingredient = Ingredient.new(name: params['name'], amount: params['amount'], recipe_id: params['recipeId'])
         if ingredient.save
             render json: ingredient
         else

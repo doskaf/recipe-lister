@@ -15,6 +15,39 @@ class RecipesAdapter{
         .then(() => {
           console.log(Recipe.all)
           Recipe.all.forEach(recipe => recipe.fullRender())
+          let ingredientAdapter = new IngredientsAdapter("http://localhost:3000/ingredients");
+          ingredientAdapter.fetchIngredients()
         })
     }
+
+    addRecipe() {
+      let recipeName = document.querySelector("#recipe-name-input").value;
+      if (recipeName !== "") {
+          let recipeObj = {name: recipeName};
+          this.newRecipe(recipeObj);
+      }
+    }
+
+    newRecipe(recipeObj){
+      let configObj = {
+        method: "POST",
+        headers: {"Content-Type": "application/json", "Accepts": "application/json"},
+        body: JSON.stringify(recipeObj)
+      }
+      fetch(this.baseURL, configObj)
+        .then(res => res.json())
+        .then((resObj) => {
+          console.log(resObj);
+          this.sanitizeAndAddRecipe(resObj)
+        })
+    }
+    
+    sanitizeAndAddRecipe(recipeObj){
+      let recipe = new Recipe(recipeObj.id, recipeObj.name);
+      recipe.fullRender();
+      let ingredientAdapter = new IngredientsAdapter("http://localhost:3000/ingredients");
+      ingredientAdapter.addIngredients(recipe.id);
+      console.log("About to Render")
+    }
+
   }

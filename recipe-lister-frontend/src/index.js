@@ -11,27 +11,15 @@ document.addEventListener("DOMContentLoaded", function() {
           recipeForm.style.display = "none";
         }
     });
+    let newRecipeBtn = document.querySelector("#create-recipe-button");
+    newRecipeBtn.addEventListener("click", function(event) {
+        event.preventDefault();
+        recipeAdapter.addRecipe();
+    });
 })
 
 let recipeAdapter = new RecipesAdapter("http://localhost:3000/recipes");
 recipeAdapter.fetchRecipes();
-
-let ingredientAdapter = new IngredientsAdapter("http://localhost:3000/ingredients");
-ingredientAdapter.fetchIngredients();
-
-// function renderAllRecipes(){
-//     Recipe.all.forEach(recipe => {
-//         let h = document.createElement('H1');
-//         h.innerText = `${recipe.name}`
-//         document.getElementById('main').appendChild(h);
-//     })
-// }
-
-function renderAllIngredients(){
-    Ingredient.all.forEach(ingredient => {
-      ingredient.fullRender();
-    })
-}
 
 function formListener() {
     let counter = 0;

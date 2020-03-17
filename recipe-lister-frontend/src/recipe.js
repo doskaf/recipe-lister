@@ -13,6 +13,12 @@ class Recipe {
         Recipe.all.push(this);
     }
 
+    ingredients() {
+        return Ingredient.all.filter(function(ingredient){
+            return ingredient.recipeId === this.id
+        }, this)
+    }
+
     fullRender() {
         let main = document.querySelector("#main");
         this.div.innerHTML = `
@@ -23,5 +29,13 @@ class Recipe {
         <button class="delete-recipe-button">Delete Recipe</button>
         `
         main.appendChild(this.div);
+
+        // if (this.ingredients() !== []) {
+        //     this.ingredients().forEach(ingredient => {
+        //         let li = document.createElement('LI');
+        //         li.innerText = `${ingredient.name} | ${ingredient.amount}`;
+        //         this.div.children[3].appendChild(li)
+        //     }, this)
+        // }
     }
 }
