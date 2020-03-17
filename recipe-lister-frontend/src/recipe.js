@@ -30,12 +30,17 @@ class Recipe {
         `
         main.appendChild(this.div);
 
-        // if (this.ingredients() !== []) {
-        //     this.ingredients().forEach(ingredient => {
-        //         let li = document.createElement('LI');
-        //         li.innerText = `${ingredient.name} | ${ingredient.amount}`;
-        //         this.div.children[3].appendChild(li)
-        //     }, this)
-        // }
+        let recipe = this;
+
+        let addToListBtn = this.div.children[1];
+        let editBtn = this.div.children[5];
+        let deleteBtn = this.div.children[7];
+
+        let recipeAdapter = new RecipesAdapter("http://localhost:3000/recipes")
+
+        deleteBtn.addEventListener("click", function(event) {
+            event.preventDefault();
+            recipeAdapter.deleteRecipe(recipe)
+        })
     }
 }

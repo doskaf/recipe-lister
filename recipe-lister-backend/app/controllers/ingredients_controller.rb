@@ -14,4 +14,14 @@ class IngredientsController < ApplicationController
         end
     end
 
+    def show
+        ingredient = Ingredient.all.find_by(id: params[:id])
+        render json: ingredient
+    end
+
+    def destroy
+        ingredient = Ingredient.all.find_by(id: params[:id])
+        ingredient.destroy
+    end
+
 end

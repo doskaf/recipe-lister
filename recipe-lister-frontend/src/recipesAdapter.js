@@ -50,4 +50,21 @@ class RecipesAdapter{
       console.log("About to Render")
     }
 
+    deleteRecipe(recipe) {
+      let ingredientAdapter = new IngredientsAdapter("http://localhost:3000/ingredients");
+
+      recipe.ingredients().forEach(ingredient => {
+        ingredientAdapter.deleteIngredient(ingredient);
+      })
+
+      fetch(this.baseURL + `/${recipe.id}`, {
+        method: 'DELETE',
+      })
+      .then()
+      .then((json) => {
+        console.log(json)
+        recipe.div.remove();
+      })
+    }
+
   }

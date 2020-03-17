@@ -47,4 +47,14 @@ class IngredientsAdapter {
       ingredient.fullRender();
       console.log("New ingredient created")
     }
+
+    deleteIngredient(ingredient) {
+      fetch(this.baseURL + `/${ingredient.id}`, {
+        method: 'DELETE',
+      })
+      .then()
+      .then((json) => {
+        console.log(json)
+      })
+    }
 }
