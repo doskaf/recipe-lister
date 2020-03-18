@@ -1,2 +1,1 @@
-- Shopping list functionality
 - Css styling

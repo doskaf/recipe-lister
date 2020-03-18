@@ -38,6 +38,10 @@ class Recipe {
 
         let recipeAdapter = new RecipesAdapter("http://localhost:3000/recipes")
 
+        addToListBtn.addEventListener("click", function(event) {
+            event.preventDefault();
+            recipeAdapter.addToList(recipe)
+        })
         editBtn.addEventListener("click", function(event) {
             event.preventDefault();
             if (this.innerText === "Edit") {

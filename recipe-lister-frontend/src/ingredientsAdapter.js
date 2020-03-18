@@ -45,6 +45,15 @@ class IngredientsAdapter {
     sanitizeAndAddIngredient(ingredientObj){
       let ingredient = new Ingredient(ingredientObj.id, ingredientObj.name, ingredientObj.amount, ingredientObj.recipe_id);
       ingredient.fullRender();
+
+      // reset form after ingredients are done being added
+      let form = document.querySelector(".add-recipe-form");
+      form.style.display = "none";
+      form.children[1].value = "";
+      for (let i = 0; i < form.children[3].children.length; i++) {
+          form.children[3].children[i].children[0].value = "";
+          form.children[3].children[i].children[1].value = "";
+      }
     }
 
     updateIngredient(ingId, ingName, ingAmount) {

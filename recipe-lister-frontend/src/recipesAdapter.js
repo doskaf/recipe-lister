@@ -135,4 +135,32 @@ class RecipesAdapter{
       })
     }
 
+    addToList(recipe) {
+      const shoppingList = document.querySelector("#shopping-list");
+      let ingredientsDiv = shoppingList.children[2];
+
+      let ingredientsOnList = []
+      for (let i = 0; i < ingredientsDiv.children.length; i++) {
+        ingredientsOnList.push(ingredientsDiv.children[i].children[i].innerText)
+      }
+
+      recipe.ingredients().forEach(ingredient => {
+        if (!ingredientsOnList.includes(ingredient.name)) {
+          let ingrElement = document.createElement('div');
+          ingrElement.innerHTML = `
+            <input type="checkbox">
+            <label>${ingredient.name}</label>
+            <button>x</button>
+            <br>
+          `
+          ingrElement.children[2].addEventListener("click", () => {
+            ingrElement.remove();
+          })
+
+          ingredientsDiv.appendChild(ingrElement);
+        }
+      })
+      shoppingList.style.display = "block";
+    }
+
   }
