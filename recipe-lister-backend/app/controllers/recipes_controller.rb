@@ -19,6 +19,12 @@ class RecipesController < ApplicationController
         render json: recipe
     end
 
+    def update
+        recipe = Recipe.all.find_by(id: params[:id])
+        recipe.update(name: params['name'])
+        render json: recipe
+    end
+
     def destroy
         recipe = Recipe.all.find_by(id: params[:id])
         recipe.destroy

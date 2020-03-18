@@ -19,6 +19,12 @@ class IngredientsController < ApplicationController
         render json: ingredient
     end
 
+    def update
+        ingredient = Ingredient.all.find_by(id: params[:id])
+        ingredient.update(name: params['name'], amount: params['amount'])
+        render json: ingredient
+    end
+
     def destroy
         ingredient = Ingredient.all.find_by(id: params[:id])
         ingredient.destroy

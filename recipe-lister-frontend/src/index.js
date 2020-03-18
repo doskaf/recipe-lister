@@ -46,7 +46,6 @@ function formListener() {
         />
         <br />
         `
-        
         ingredientInput.appendChild(div);
     })
 }

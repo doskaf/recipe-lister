@@ -38,6 +38,14 @@ class Recipe {
 
         let recipeAdapter = new RecipesAdapter("http://localhost:3000/recipes")
 
+        editBtn.addEventListener("click", function(event) {
+            event.preventDefault();
+            if (this.innerText === "Edit") {
+                recipeAdapter.editRecipe(recipe)
+            } else {
+                recipeAdapter.updateRecipe(recipe)
+            }
+        })
         deleteBtn.addEventListener("click", function(event) {
             event.preventDefault();
             recipeAdapter.deleteRecipe(recipe)

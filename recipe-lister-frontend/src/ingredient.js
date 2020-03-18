@@ -18,6 +18,7 @@ class Ingredient {
     fullRender() {
         let ul = document.querySelector(`#recipe-${this.recipeId}`).children[3];
         let li = document.createElement('LI');
+        li.id = `ingredient-${this.id}`
         li.innerText = `${this.name} | ${this.amount}`;
         ul.appendChild(li);
     }

@@ -45,7 +45,24 @@ class IngredientsAdapter {
     sanitizeAndAddIngredient(ingredientObj){
       let ingredient = new Ingredient(ingredientObj.id, ingredientObj.name, ingredientObj.amount, ingredientObj.recipe_id);
       ingredient.fullRender();
-      console.log("New ingredient created")
+    }
+
+    updateIngredient(ingId, ingName, ingAmount) {
+      let ingredient = Ingredient.all.find(e => e.id === ingId);
+
+      let configObj = {
+        method: "PATCH",
+        headers: {"Content-Type": "application/json", "Accepts": "application/json"},
+        body: JSON.stringify({name: ingName, amount: ingAmount})
+      }
+      fetch(this.baseURL + `/${ingredient.id}`, configObj)
+      .then(res => res.json())
+      .then((resObj) => {
+        console.log(resObj);
+        ingredient.name = resObj.name;
+        ingredient.amount = resObj.amount;
+        ingredient.fullRender();
+      })
     }
 
     deleteIngredient(ingredient) {
