@@ -1,4 +1,2 @@
-- Add delete button to ingredients when editing recipe
 - Shopping list functionality
-- After recipe is submitted, clear/hide new recipe form
 - Css styling

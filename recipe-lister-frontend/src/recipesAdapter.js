@@ -79,9 +79,15 @@ class RecipesAdapter{
             value="${ingAmount}"
             class="input-text"
         />
+        <button class="delete-ingredient">x</button>
         <br />
         `
         recipe.div.children[3].children[i].replaceWith(editIngr)
+        recipe.div.children[3].children[i].children[2].addEventListener("click", function(event) {
+          event.preventDefault();
+          ingredientAdapter.deleteIngredient(Ingredient.all.find(e => e.id === ingId));
+          recipe.fullRender();
+        })
       }
     }
 

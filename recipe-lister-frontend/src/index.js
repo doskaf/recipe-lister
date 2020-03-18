@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
     newRecipeBtn.addEventListener("click", function(event) {
         event.preventDefault();
         recipeAdapter.addRecipe();
+        resetForm(recipeForm);
     });
 })
 
@@ -48,4 +49,13 @@ function formListener() {
         `
         ingredientInput.appendChild(div);
     })
+}
+
+function resetForm(form) {
+    form.style.display = "none";
+    form.children[1].value = "";
+    for (let i = 0; i < form.children[3].children.length; i++) {
+        form.children[3].children[i].children[0].value = "";
+        form.children[3].children[i].children[1].value = "";
+    }
 }
