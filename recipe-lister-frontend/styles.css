@@ -5,6 +5,7 @@ body {
 
 h1 {
     text-align: center;
+    padding-top: 50px;
 }
 
 #header-buttons {
@@ -15,6 +16,45 @@ h1 {
     text-align: center;
 }
 
+.card {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    float: left;
+    border-style: dotted;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 119, 255, 0.2);
+}
+
+.card.col-md-3 {
+    background-color: #ffb3b3;
+}
+
+#main {
+    margin-top: 50px;
+    margin-left: 18%;
+}
+
 #shopping-list {
     text-align: cener;
+}
+
+.add-recipe-form {
+    padding-top: 50px;
+}
+
+#shopping-list-button {
+    background-color: lightskyblue;
+}
+
+.recipe-header {
+    color: gray;
 }

@@ -7,7 +7,7 @@ class Recipe {
         this.name = name;
 
         this.div = document.createElement('div');
-        this.div.className = "recipe";
+        this.div.className = "card col-md-3";
         this.div.id = `recipe-${this.id}`;
 
         Recipe.all.push(this);
@@ -22,8 +22,8 @@ class Recipe {
     fullRender() {
         let main = document.querySelector("#main");
         this.div.innerHTML = `
-        <h3>${this.name}</h3>
-        <button class="add-to-list-button">Add to Shopping List</button><br />
+        <h3 class="recipe-header">${this.name}</h3>
+        <button class="add-to-list-button" data-toggle="modal" data-target="#myModal">Add to Shopping List</button><br />
         <ul></ul><br />
         <button class="edit-recipe-button">Edit</button><br />
         <button class="delete-recipe-button">Delete Recipe</button>

@@ -137,7 +137,7 @@ class RecipesAdapter{
 
     addToList(recipe) {
       const shoppingList = document.querySelector("#shopping-list");
-      let ingredientsDiv = shoppingList.children[2];
+      let ingredientsDiv = shoppingList.children[0];
 
       let ingredientsOnList = []
       for (let i = 0; i < ingredientsDiv.children.length; i++) {
@@ -160,7 +160,6 @@ class RecipesAdapter{
           ingredientsDiv.appendChild(ingrElement);
         }
       })
-      shoppingList.style.display = "block";
     }
 
   }

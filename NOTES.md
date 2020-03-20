@@ -1,1 +1,2 @@
-- Css styling
+- Recipes don't add right
+- Add "Add Ingredient" option while editing recipe

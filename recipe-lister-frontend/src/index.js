@@ -1,7 +1,7 @@
 const recipeForm = document.querySelector(".add-recipe-form");
 recipeForm.style.display = "none";
 const shoppingList = document.querySelector("#shopping-list");
-shoppingList.style.display = "none";
+// shoppingList.style.display = "none";
 
 document.addEventListener("DOMContentLoaded", function() {
     const addBtn = document.querySelector("#add-recipe-button");
@@ -13,24 +13,13 @@ document.addEventListener("DOMContentLoaded", function() {
           recipeForm.style.display = "none";
         }
     });
-    let viewListBtn = document.querySelector("#shopping-list-button");
-    viewListBtn.addEventListener("click", () => {
-        if (shoppingList.style.display === "none") {
-            shoppingList.style.display = "block";
-            shoppingList.children[1].addEventListener("click", () => {
-                shoppingList.style.display = "none";
-            })
-            shoppingList.children[4].addEventListener("click", () => {
-                if (shoppingList.children.length === 5) {
-                    addIngredientToShoppingListForm(shoppingList);
-                } else {
-                    addIngredientToShoppingList(shoppingList);
-                }
-            })
-          } else {
-            shoppingList.style.display = "none";
-          }
-    });
+    document.querySelector("#add-ingredient-to-list").addEventListener("click", () => {
+        if (shoppingList.children.length === 3) {
+            addIngredientToShoppingListForm(shoppingList);
+        } else {
+            addIngredientToShoppingList(shoppingList);
+        }
+    })
     let newRecipeBtn = document.querySelector("#create-recipe-button");
     newRecipeBtn.addEventListener("click", function(event) {
         event.preventDefault();
@@ -80,7 +69,7 @@ function addIngredientToShoppingListForm(shoppingList) {
 }
 
 function addIngredientToShoppingList(shoppingList) {
-    let ingrName = shoppingList.children[5].value
+    let ingrName = shoppingList.children[3].value
 
     let ingrElement = document.createElement('div');
     ingrElement.innerHTML = `
@@ -92,6 +81,6 @@ function addIngredientToShoppingList(shoppingList) {
     ingrElement.children[2].addEventListener("click", () => {
         ingrElement.remove();
       })
-    shoppingList.children[2].appendChild(ingrElement);
-    shoppingList.children[5].remove();
+    shoppingList.children[0].appendChild(ingrElement);
+    shoppingList.children[3].remove();
 }
