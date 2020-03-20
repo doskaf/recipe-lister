@@ -1,24 +1,24 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to Recipe Lister, a simple application where you can post recipes and have a shopping list made for you out of those recipes' ingredients!
 
-Things you may want to cover:
+## How to Use Recipe Lister
 
-* Ruby version
+With Recipe Lister, you can post, edit, and delete recipes. You can then add the ingredients to your shopping list with the handy "Add to Shopping List" button. While viewing your list, you can check off ingredients, delete them, and add new ones!
 
-* System dependencies
 
-* Configuration
+## Installation
 
-* Database creation
+Clone this repository and run:
 
-* Database initialization
+    $ bundle install
 
-* How to run the test suite
+And then execute:
 
-* Services (job queues, cache servers, search engines, etc.)
+    $ rake db:migrate
 
-* Deployment instructions
+Run
 
-* ...
+    $ rails s
+
+Finally, open up [index.html](./recipe-lister-frontend/index.html) in your browser and begin creating recipes!
