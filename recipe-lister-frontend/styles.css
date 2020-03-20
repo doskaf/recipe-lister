@@ -58,3 +58,7 @@ h1 {
 .recipe-header {
     color: gray;
 }
+
+.add-ingredient-to-recipe {
+    margin-bottom: 20px;
+}

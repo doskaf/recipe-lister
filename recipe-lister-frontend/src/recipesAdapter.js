@@ -67,6 +67,7 @@ class RecipesAdapter{
         let ingId = parseInt(recipe.div.children[3].children[i].id.split("ingredient-")[1])
 
         let editIngr = document.createElement('div');
+
         editIngr.id = `edit-ingredient-${ingId}`
         editIngr.innerHTML = `
         <input
@@ -82,6 +83,35 @@ class RecipesAdapter{
         <button class="delete-ingredient">x</button>
         <br />
         `
+        let addIngr = document.createElement('BUTTON');
+        addIngr.innerText = "Add Ingredient";
+        addIngr.className = "add-ingredient-to-recipe"
+
+        recipe.div.children[4].insertAdjacentElement('afterend', addIngr);
+
+        addIngr.addEventListener("click", function(event) {
+          event.preventDefault();
+          if (addIngr.innerText === "Add Ingredient") {
+            let input = document.createElement('div')
+            input.innerHTML = `
+            <input placeholder="Ingredient Name..." />
+            <input placeholder="Amount..." />
+            <br />
+            `
+            recipe.div.children[4].insertAdjacentElement('afterend', input);
+            addIngr.innerText = "Submit Ingredient"
+          } else {
+            let newName = recipe.div.children[5].children[0].value;
+            let newAmount = recipe.div.children[5].children[1].value;
+            if (newName !== "" && newAmount !== "") {
+              let ingObj = {name: newName, amount: newAmount, recipeId: recipe.id};
+              ingredientAdapter.newIngredient(ingObj);
+              recipe.div.children[5].remove();
+              addIngr.innerText = "Add Ingredient";
+            }
+          }
+        })
+
         recipe.div.children[3].children[i].replaceWith(editIngr)
         recipe.div.children[3].children[i].children[2].addEventListener("click", function(event) {
           event.preventDefault();
