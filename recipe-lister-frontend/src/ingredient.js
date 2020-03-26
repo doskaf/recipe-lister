@@ -8,6 +8,10 @@ class Ingredient {
         this.amount = amount;
         this.recipeId = recipeId;
 
+        this.li = document.createElement('LI');
+        this.li.id = `ingredient-${this.id}`;
+        this.li.innerText = `${this.name} | ${this.amount}`;
+
         Ingredient.all.push(this);
     }
 
@@ -17,9 +21,6 @@ class Ingredient {
 
     fullRender() {
         let ul = document.querySelector(`#recipe-${this.recipeId}`).children[3];
-        let li = document.createElement('LI');
-        li.id = `ingredient-${this.id}`
-        li.innerText = `${this.name} | ${this.amount}`;
-        ul.appendChild(li);
+        ul.appendChild(this.li);
     }
 }

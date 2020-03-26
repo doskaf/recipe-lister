@@ -28,14 +28,6 @@ class Recipe {
         <button class="edit-recipe-button">Edit</button><br />
         <button class="delete-recipe-button">Delete Recipe</button>
         `
-        let ul = this.div.children[3]
-
-        if (this.ingredients() !== null) {
-            this.ingredients().forEach(ingredient => {
-                ingredient.fullRender();
-            })
-        }
-
         main.appendChild(this.div);
 
         let recipe = this;
@@ -62,5 +54,12 @@ class Recipe {
             event.preventDefault();
             recipeAdapter.deleteRecipe(recipe)
         })
+
+        
+        if (this.ingredients() !== null) {
+            this.ingredients().forEach(ingredient => {
+                ingredient.fullRender();
+            })
+        }
     }
 }

@@ -6,9 +6,9 @@ class RecipesController < ApplicationController
     end
 
     def create
-        recipe = Recipe.new(name: params['name'])
+        recipe = Recipe.new(params.permit(:name, ingredients_attributes: [:name, :amount]))
         if recipe.save
-            render json: recipe
+            render json: recipe, :include => :ingredients
         else
             render json: { errors: recipe.errors.full_messages }
         end
@@ -16,17 +16,18 @@ class RecipesController < ApplicationController
 
     def show
         recipe = Recipe.all.find_by(id: params[:id])
-        render json: recipe
+        render json: recipe, :include => :ingredients
     end
 
     def update
         recipe = Recipe.all.find_by(id: params[:id])
-        recipe.update(name: params['name'])
-        render json: recipe
+        recipe.update(params.permit(:name, ingredients_attributes: [:id, :name, :amount]))
+        render json: recipe, :include => :ingredients
     end
 
     def destroy
         recipe = Recipe.all.find_by(id: params[:id])
+        recipe.ingredients.each {|i| i.destroy}
         recipe.destroy
     end
 

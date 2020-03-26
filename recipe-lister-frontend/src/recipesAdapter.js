@@ -23,9 +23,21 @@ class RecipesAdapter{
     addRecipe() {
       let recipeName = document.querySelector("#recipe-name-input").value;
       if (recipeName !== "") {
-          let recipeObj = {name: recipeName};
+          let recipeObj = {name: recipeName, ingredients_attributes: this.makeIngredientObjects()}
           this.newRecipe(recipeObj);
       }
+    }
+
+    makeIngredientObjects() {
+      let ingInputs = document.querySelector("#ingredients-input").children;
+      let ingredients = []
+      for (let i = 0; i < ingInputs.length; i++) {
+          if (ingInputs[i].children[0].value !== "" && ingInputs[i].children[1].value !== "") {
+              let ingObj = { name: ingInputs[i].children[0].value, amount: ingInputs[i].children[1].value }
+              ingredients.push(ingObj)
+          }
+      }
+      return ingredients
     }
 
     newRecipe(recipeObj){
@@ -44,14 +56,25 @@ class RecipesAdapter{
     
     sanitizeAndAddRecipe(recipeObj){
       let recipe = new Recipe(recipeObj.id, recipeObj.name);
+      recipeObj.ingredients.forEach(ingredientObj => {
+        new Ingredient(ingredientObj.id, ingredientObj.name, ingredientObj.amount, ingredientObj.recipe_id)
+      })
       recipe.fullRender();
-      let ingredientAdapter = new IngredientsAdapter("http://localhost:3000/ingredients");
-      ingredientAdapter.addIngredients(recipe.id);
+      this.resetForm();
+    }
+
+    resetForm() {
+      let form = document.querySelector(".add-recipe-form");
+      form.style.display = "none";
+      form.children[1].value = "";
+      document.querySelector("#ingredient-input-0").children[0].value == "";
+      document.querySelector("#ingredient-input-0").children[1].value == "";
+      for (let i = 1; i < form.children[3].children.length; i++) {
+          form.children[3].children[i].remove();
+      }
     }
 
     editRecipe(recipe) {
-      let ingredientAdapter = new IngredientsAdapter("http://localhost:3000/ingredients");
-
       recipe.div.children[5].innerText = "Confirm Changes";
 
       let editName = document.createElement('INPUT');
@@ -87,10 +110,24 @@ class RecipesAdapter{
         recipe.div.children[3].children[i].replaceWith(editIngr)
         recipe.div.children[3].children[i].children[2].addEventListener("click", function(event) {
           event.preventDefault();
+          let ingredientAdapter = new IngredientsAdapter("http://localhost:3000/ingredients");
           ingredientAdapter.deleteIngredient(Ingredient.all.find(e => e.id === ingId));
-          recipe.fullRender();
         })
       }
+    }
+
+    updateIngredientObjects(recipe) {
+      let ingredients = []
+      for (let i = 0; i < recipe.div.children[3].children.length; i++) {
+
+        let newIngName = recipe.div.children[3].children[i].children[0].value;
+        let newIngAmount = recipe.div.children[3].children[i].children[1].value;
+        let ingId = parseInt(recipe.div.children[3].children[i].id.split("edit-ingredient-")[1]);
+
+        let ingObj = {id: ingId, name: newIngName, amount: newIngAmount}
+        ingredients.push(ingObj);
+      }
+      return ingredients
     }
 
     updateRecipe(recipe) {
@@ -99,34 +136,23 @@ class RecipesAdapter{
       let configObj = {
         method: "PATCH",
         headers: {"Content-Type": "application/json", "Accepts": "application/json"},
-        body: JSON.stringify({name: newName})
+        body: JSON.stringify({name: newName, ingredients_attributes: this.updateIngredientObjects(recipe)})
       }
       fetch(this.baseURL + `/${recipe.id}`, configObj)
       .then(res => res.json())
       .then((resObj) => {
         console.log(resObj);
         recipe.name = resObj.name;
+        recipe.ingredients().forEach(ingredient => {
+          let ingrObj = resObj.ingredients.find(e => e.id === ingredient.id);
+          ingredient.name = ingrObj.name;
+          ingredient.amount = ingrObj.amount;
+        })
         recipe.fullRender();
       })
-
-      for (let i = 0; i < recipe.div.children[3].children.length; i++) {
-        let ingredientAdapter = new IngredientsAdapter("http://localhost:3000/ingredients")
-
-        let newIngName = recipe.div.children[3].children[i].children[0].value;
-        let newIngAmount = recipe.div.children[3].children[i].children[1].value;
-        let ingId = parseInt(recipe.div.children[3].children[i].id.split("edit-ingredient-")[1]);
-
-        ingredientAdapter.updateIngredient(ingId, newIngName, newIngAmount);
-      }
     }
 
     deleteRecipe(recipe) {
-      let ingredientAdapter = new IngredientsAdapter("http://localhost:3000/ingredients");
-
-      recipe.ingredients().forEach(ingredient => {
-        ingredientAdapter.deleteIngredient(ingredient);
-      })
-
       fetch(this.baseURL + `/${recipe.id}`, {
         method: 'DELETE',
       })
