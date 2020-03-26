@@ -67,8 +67,8 @@ class RecipesAdapter{
       let form = document.querySelector(".add-recipe-form");
       form.style.display = "none";
       form.children[1].value = "";
-      document.querySelector("#ingredient-input-0").children[0].value == "";
-      document.querySelector("#ingredient-input-0").children[1].value == "";
+      document.querySelector("#ingredient-input-0").children[0].value = "";
+      document.querySelector("#ingredient-input-0").children[1].value = "";
       for (let i = 1; i < form.children[3].children.length; i++) {
           form.children[3].children[i].remove();
       }
@@ -143,8 +143,8 @@ class RecipesAdapter{
       .then((resObj) => {
         console.log(resObj);
         recipe.name = resObj.name;
-        recipe.ingredients().forEach(ingredient => {
-          let ingrObj = resObj.ingredients.find(e => e.id === ingredient.id);
+        resObj.ingredients.forEach(ingrObj => {
+          let ingredient = Ingredient.all.find(e => e.id === ingrObj.id);
           ingredient.name = ingrObj.name;
           ingredient.amount = ingrObj.amount;
         })
